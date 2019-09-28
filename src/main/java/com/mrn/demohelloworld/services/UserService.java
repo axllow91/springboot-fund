@@ -24,7 +24,7 @@ public class UserService {
         // if user exists using the username throw exception
         User existingUser = userRepository.getUserByUsername(user.getUsername());
         if(existingUser != null)
-            throw new UserExistsException("User already exists in Repository");
+            throw new UserExistsException("User {" + existingUser + "} already exists in Repository");
 
         return userRepository.save(user);
     }

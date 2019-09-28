@@ -1,6 +1,8 @@
 package com.mrn.demohelloworld.entities;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "user")
@@ -10,9 +12,11 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotEmpty(message = "Username is mandatory field. Please provide a username!")
     @Column(name = "USER_NAME", length = 50, nullable = false, unique = true)
     private String username;
 
+    @Size(min=2, message = "First Name should have at least 2 characters")
     @Column(name = "FIRST_NAME", length = 50, nullable = false)
     private String firstName;
     @Column(name = "LAST_NAME", length = 50, nullable = false)
