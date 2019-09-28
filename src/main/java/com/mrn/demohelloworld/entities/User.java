@@ -3,6 +3,8 @@ package com.mrn.demohelloworld.entities;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "user")
@@ -31,9 +33,11 @@ public class User {
     @Column(name = "SSN", length = 50, nullable = false, unique = true)
     private String ssn;
 
+    // can have one user for multiple orders
+    @OneToMany(mappedBy = "user") // this will create a userId FK in orders table
+    private List<Order> orders = new ArrayList<>();
+
     // No arg constructor
-
-
     public User() {
     }
 
@@ -100,6 +104,14 @@ public class User {
 
     public void setSsn(String ssn) {
         this.ssn = ssn;
+    }
+
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
     }
 
     @Override

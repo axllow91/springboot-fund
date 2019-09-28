@@ -20,6 +20,7 @@ import java.util.Optional;
 
 @RestController
 @Validated // this annotation validates the path variable of uri
+@RequestMapping(value = "/users")
 public class UserController {
 
     private UserService userService;
@@ -31,7 +32,7 @@ public class UserController {
     // create user
     // @RequestBody
     // @PostMapping
-    @PostMapping("/users")
+    @PostMapping
     public ResponseEntity<User> createUser(@Valid @RequestBody User user, UriComponentsBuilder builder) {
         try {
             userService.creatUser(user);
@@ -46,7 +47,7 @@ public class UserController {
     // get user by id
     // @PathVariable
     // @GetMapping
-    @GetMapping("/users/{id}")
+    @GetMapping("/{id}")
     // path variable cannot be 0. starts from 1 to max if we setup because we used @Min annotation
     public Optional<User> getUserById(@PathVariable("id") @Min(1) Long id) {
         try {
@@ -59,7 +60,7 @@ public class UserController {
     }
 
     // get user by username
-    @GetMapping("/users/byusername/{username}")
+    @GetMapping("/byusername/{username}")
     public User getUserByUsername(@PathVariable("username") String username) throws UsernameNotFoundException {
         User user = userService.getUserByUsername(username);
         if(user == null)
@@ -69,13 +70,13 @@ public class UserController {
     }
 
 
-    @GetMapping("/users")
+    @GetMapping
     public List<User> getAllUsers() {
         return userService.getAllUsers();
     }
 
     // update user by id
-    @PutMapping("/users/{id}")
+    @PutMapping("/{id}")
     public User updateUserById(@PathVariable Long id, @RequestBody User user) {
         try {
             return userService.updateUserById(id, user);
@@ -86,7 +87,7 @@ public class UserController {
     }
 
     // delete user by id
-    @DeleteMapping("/users/{id}")
+    @DeleteMapping("/{id}")
     public void deleteUserById(@PathVariable("id") Long id) {
         userService.deleteUserById(id);
     }
