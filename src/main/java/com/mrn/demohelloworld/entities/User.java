@@ -1,5 +1,7 @@
 package com.mrn.demohelloworld.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.hateoas.ResourceSupport;
 
 import javax.persistence.*;
@@ -10,6 +12,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "user")
+@JsonIgnoreProperties({"firstName", "lastName"})
 public class User extends ResourceSupport {
 
     @Id
@@ -32,6 +35,7 @@ public class User extends ResourceSupport {
     @Column(name = "ROLE", length = 50, nullable = false)
     private String role;
 
+    @JsonIgnore
     @Column(name = "SSN", length = 50, nullable = false, unique = true)
     private String ssn;
 
