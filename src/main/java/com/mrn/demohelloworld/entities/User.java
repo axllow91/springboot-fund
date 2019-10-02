@@ -1,5 +1,7 @@
 package com.mrn.demohelloworld.entities;
 
+import org.springframework.hateoas.ResourceSupport;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
@@ -8,11 +10,11 @@ import java.util.List;
 
 @Entity
 @Table(name = "user")
-public class User {
+public class User extends ResourceSupport {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long userId;
 
     @NotEmpty(message = "Username is mandatory field. Please provide a username!")
     @Column(name = "USER_NAME", length = 50, nullable = false, unique = true)
@@ -41,21 +43,23 @@ public class User {
     public User() {
     }
 
-    public User(String username, String firstName, String lastName, String email, String role, String ssn) {
+    public User(String username, String firstName,
+                String lastName, String email, String role, String ssn, List<Order> orders) {
         this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.role = role;
         this.ssn = ssn;
+        this.orders = orders;
     }
 
-    public Long getId() {
-        return id;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public String getUsername() {
@@ -117,13 +121,14 @@ public class User {
     @Override
     public String toString() {
         return "User{" +
-                "id=" + id +
+                "userId=" + userId +
                 ", username='" + username + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
                 ", role='" + role + '\'' +
                 ", ssn='" + ssn + '\'' +
+                ", orders=" + orders +
                 '}';
     }
 }

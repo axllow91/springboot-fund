@@ -43,7 +43,7 @@ public class UserService {
         if(!optionalUser.isPresent())
             throw new UserNotFoundException("User not found in user Repository. Please provide the correct user id");
 
-        user.setId(id);
+        user.setUserId(id);
         return userRepository.save(user);
     }
 

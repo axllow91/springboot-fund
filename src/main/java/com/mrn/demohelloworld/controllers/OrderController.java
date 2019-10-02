@@ -21,7 +21,6 @@ public class OrderController {
     public OrderController(UserRepository userRepository, OrderRepository orderRepository) {
         this.userRepository = userRepository;
         this.orderRepository = orderRepository;
-
     }
 
     // get all Orders for a user
@@ -67,7 +66,7 @@ public class OrderController {
 
         // if user exists return order by id
         Optional<Order> orderOptional = orderRepository.findById(orderId);
-        if(orderOptional == null) throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Order not found!");
+        if(!orderOptional.isPresent()) throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Order not found!");
 
         User user = userOptional.get();
         Order order = orderOptional.get();
