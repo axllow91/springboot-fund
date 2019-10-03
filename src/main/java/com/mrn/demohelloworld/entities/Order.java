@@ -1,6 +1,7 @@
 package com.mrn.demohelloworld.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.hateoas.ResourceSupport;
 
 import javax.persistence.*;
@@ -11,7 +12,10 @@ public class Order extends ResourceSupport {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonView(Views.Internal.class)
     private Long orderId;
+
+    @JsonView(Views.Internal.class)
     private String orderDescription;
 
     // can have multiple orders for one user
