@@ -14,45 +14,51 @@ import java.util.List;
 // @JsonFilter(value = "userFilter")
 //@JsonIgnoreProperties({"firstName", "lastName"}) -- Static filtering JsonIgnore
 public class User extends ResourceSupport {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JsonView(Views.External.class)
     private Long userId;
-
     @NotEmpty(message = "Username is mandatory field. Please provide a username!")
     @Column(name = "USER_NAME", length = 50, nullable = false, unique = true)
     @JsonView(Views.External.class)
     private String username;
-
     @Size(min = 2, message = "First Name should have at least 2 characters")
     @Column(name = "FIRST_NAME", length = 50, nullable = false)
     @JsonView(Views.External.class)
     private String firstName;
-
     @Column(name = "LAST_NAME", length = 50, nullable = false)
     @JsonView(Views.External.class)
     private String lastName;
-
     @Column(name = "EMAIL_ADDRESS", length = 50, nullable = false)
     private String email;
-
     @Column(name = "ROLE", length = 50, nullable = false)
     @JsonView(Views.Internal.class)
     private String role;
-
     // @JsonIgnore - Static Filtering @JsonIgnore
     @Column(name = "SSN", length = 50, nullable = false, unique = true)
     @JsonView(Views.Internal.class)
     private String ssn;
-
     // can have one user for multiple orders
     @OneToMany(mappedBy = "user") // this will create a userId FK in orders table
     @JsonView(Views.Internal.class)
     private List<Order> orders = new ArrayList<>();
 
+    @Column(name = "Address")
+    private String address;
+
     // No arg constructor
     public User() {
+    }
+
+    public User(@NotEmpty(message = "Username is mandatory field. Please provide a username!") String username, @Size(min = 2, message = "First Name should have at least 2 characters") String firstName, String lastName, String email, String role, String ssn, List<Order> orders, String address) {
+        this.username = username;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.role = role;
+        this.ssn = ssn;
+        this.orders = orders;
+        this.address = address;
     }
 
     public User(String username, String firstName,
@@ -130,6 +136,15 @@ public class User extends ResourceSupport {
         this.orders = orders;
     }
 
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    // to string is most useful  when we are using the logging
     @Override
     public String toString() {
         return "User{" +
@@ -141,6 +156,7 @@ public class User extends ResourceSupport {
                 ", role='" + role + '\'' +
                 ", ssn='" + ssn + '\'' +
                 ", orders=" + orders +
+                ", address='" + address + '\'' +
                 '}';
     }
 }

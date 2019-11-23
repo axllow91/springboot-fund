@@ -1,7 +1,7 @@
 --  users table
-insert into user values(101, 'kadick@gmaio.com', 'Kadick', 'Semur', 'admin', 'ssn101', 'kadick');
-insert into user values(102, 'cedek@gmaio.com', 'Cedek', 'Arim', 'admin', 'ssn102', 'cedek');
-insert into user values(103, 'marum@gmaio.com', 'Marum', 'Derur', 'admin', 'ssn103', 'marum');
+insert into user values(101, 'some city', 'kadick@gmaio.com', 'Kadick', 'Semur', 'admin', 'ssn101', 'kadick');
+insert into user values(102, 'arziona', 'cedek@gmaio.com', 'Cedek', 'Arim', 'admin', 'ssn102', 'cedek');
+insert into user values(103, 'madanrin', 'marum@gmaio.com', 'Marum', 'Derur', 'admin', 'ssn103', 'marum');
 
 -- orders table
 insert into orders values (2001, 'Samsung Smart TV', 101);

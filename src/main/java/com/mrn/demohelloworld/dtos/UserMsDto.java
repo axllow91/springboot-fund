@@ -1,5 +1,6 @@
 package com.mrn.demohelloworld.dtos;
 
+// Map struct
 public class UserMsDto {
 
     private Long userId;

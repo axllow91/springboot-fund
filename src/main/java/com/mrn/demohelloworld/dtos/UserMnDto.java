@@ -4,6 +4,7 @@ import com.mrn.demohelloworld.entities.Order;
 
 import java.util.List;
 
+// Model mapper
 public class UserMnDto {
     private Long userId;
     private String username;
@@ -25,7 +26,6 @@ public class UserMnDto {
     public void setUsername(String username) {
         this.username = username;
     }
-
 
     public String getFirstName() {
         return firstName;
